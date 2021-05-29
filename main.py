@@ -1,4 +1,3 @@
-from guizero import *
 import urllib.request as urlreq
 import urllib.parse as urlparse
 from urllib.parse import parse_qs
@@ -12,8 +11,6 @@ gb = gbapi.Client()
 
 f = []
 
-app = App(title="Forever Mod Installer", visible=False)
-
 
 def getModsPath():
     return os.path.abspath(os.path.dirname(os.getcwd() + "/Mods/"))
@@ -23,9 +20,7 @@ def installmod(f):
     t = requests.get(
         "https://api.gamebanana.com/Core/Item/Data?itemtype=Mod&itemid={0}&fields=name".format(f[0])).json
 
-    yn = yesno("Forever Mod Installer",
-               "Do you want to install {0} ?".format(t[0]))
-    if yn == True:
+    if input("Do you want to install {0} ?".format(t[0]) + "(Y/N) \n") == "Y":
         if not os.path.exists("Mods/cache"):
             os.makedirs("Mods/cache")
         file = f[0] + ".zip"
@@ -50,5 +45,3 @@ class handler(urlreq.BaseHandler):
 
 opener = urlreq.build_opener(handler())
 urlreq.install_opener(opener)
-
-app.display()

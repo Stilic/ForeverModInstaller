@@ -1,14 +1,31 @@
+from tkinter import Button
 import handler
 from guizero import *
+import urllib.request
+from pathlib import Path
+import os
+from zipfile import ZipFile
 
-def update_text():
-    f = handler.debug.testUrl(name.value)
-    label2.value = "url archive: {0}, mod type: {1}, mod id: {2}".format(f[0], f[1], f[2])
+def getModsPath():
+    return os.path.abspath(os.path.dirname(os.getcwd() + "/Mods/"))
+
+
+def installmod():
+    f = handler.debug.testUrl(url.value)
+    if not os.path.exists("Mods/cache"):
+        os.makedirs("Mods/cache")
+    file = f[0] + ".zip"
+    urllib.request.urlretrieve("https://gamebanana.com/dl/" + f[0], os.path.abspath(
+        getModsPath() + os.path.sep + "cache" + os.path.sep + file))
+    with ZipFile(getModsPath() + os.path.sep + "cache" + os.path.sep + file, 'r') as zip:
+        zip.extractall(getModsPath())
+    if os.path.exists("Mods/cache/" + file):
+        os.remove(getModsPath() + os.path.sep + "cache" + os.path.sep + file)
+
 
 app = App(title="Forever Mod Installer")
-label = Text(app, text="Test URL")
-name = TextBox(app)
-button = PushButton(app, text="Test", command=update_text)
-label2 = Text(app)
+Text(app, text="Install via fmi protocol")
+url = TextBox(app, width=25)
+PushButton(app, text="Install", command=installmod)
 
 app.display()

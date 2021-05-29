@@ -1,0 +1,7 @@
+# Developper's Documentation
+
+## Protocol reference
+
+An FMI protocol URL start with `fmi://`. There are 3 fields: `[URL_TO_ARCHIVE]`, `[MOD_TYPE]` and `[MOD_ID]`. A typical FMI protocol URL look like this:
+
+`fmi://https://gamebanana.com/mmdl/578921,Mod,289280`

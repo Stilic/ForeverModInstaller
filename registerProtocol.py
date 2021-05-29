@@ -12,7 +12,7 @@ key = winreg.CreateKey(winreg.HKEY_CLASSES_ROOT,
 if os.path.exists(os.getcwd() + os.path.sep + "fmi.exe"):
     winreg.SetValueEx(key, "", 0, winreg.REG_SZ,
                       '"{0}" "%1"'.format(os.getcwd() + os.path.sep + "fmi.exe"))
-else:
+#else:
     print("'fmi.exe' file not found! Please add it or rename fmi excutable into 'fmi.exe'!")
 
 winreg.CloseKey(key)

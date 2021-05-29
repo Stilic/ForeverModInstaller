@@ -11,5 +11,3 @@ class handler(urlreq.BaseHandler):
 
 opener = urlreq.build_opener(handler())
 urlreq.install_opener(opener)
-
-urlreq.urlopen(sys.argv[1])

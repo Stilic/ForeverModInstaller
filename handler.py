@@ -4,7 +4,7 @@ from urllib.parse import parse_qs
 from io import StringIO as strio
 
 
-class PyProtoHandler(urlreq.BaseHandler):
+class handler(urlreq.BaseHandler):
     def fmi_open(self, req):
         fullUrl = req.get_full_url()
         f = "".join(fullUrl.split("://")[1:])
@@ -14,7 +14,7 @@ class PyProtoHandler(urlreq.BaseHandler):
         return f
 
 
-opener = urlreq.build_opener(PyProtoHandler())
+opener = urlreq.build_opener(handler())
 urlreq.install_opener(opener)
 
 

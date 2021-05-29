@@ -1,3 +1,4 @@
 requests
 guizero
 pyinstaller
+download

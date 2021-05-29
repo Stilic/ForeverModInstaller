@@ -15,4 +15,5 @@ pip3 install -r requirements.txt
 # Compile main codes files
 pyinstaller --noconfirm --onefile --windowed --name "fmi" main.py
 pyinstaller --noconfirm --onefile registerProtocol.py
+pyinstaller --noconfirm --onefile removeProtocol.py
 ```

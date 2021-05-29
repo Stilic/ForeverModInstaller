@@ -11,7 +11,7 @@ key = winreg.CreateKey(winreg.HKEY_CLASSES_ROOT,
                        proto + "\shell\open\command")
 if os.path.exists(os.getcwd() + os.path.sep + "fmi.exe"):
     winreg.SetValueEx(key, "", 0, winreg.REG_SZ,
-                      '"{0}" "%1" && pause'.format(os.getcwd() + os.path.sep + "fmi.exe"))
+                      '"{0}" "%1"'.format(os.getcwd() + os.path.sep + "fmi.exe"))
 else:
     print("'fmi.exe' file not found! Please add it or rename fmi excutable into 'fmi.exe'!")
 

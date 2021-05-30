@@ -14,5 +14,6 @@ if os.path.exists(os.getcwd() + os.path.sep + "fmi.exe"):
                       '"{0}" "%1"'.format(os.getcwd() + os.path.sep + "fmi.exe"))
 else:
     print("'fmi.exe' file not found! Please add it or rename fmi excutable into 'fmi.exe'!")
+    input("Press enter...")
 
 winreg.CloseKey(key)

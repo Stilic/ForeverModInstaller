@@ -1,10 +1,12 @@
 import urllib.request as urlreq
 import urllib.error
 import os
+import sys    
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    os.chdir(os.path.dirname(sys.executable))
+from download import download
 import sys
 import requests
-from tqdm import tqdm
-import zipfile
 from glob import glob
 import shutil
 
@@ -21,25 +23,8 @@ def install(u):
         file = f[0] + ".zip"
         modsPatch = os.path.abspath(os.path.dirname(os.getcwd() + "/Mods/"))
         cacheFile = modsPatch + os.path.sep + "cache" + os.path.sep + file
-        f = requests.get("https://gamebanana.com/dl/" +
-                         f[0], stream=True)
-        if not os.path.exists(modsPatch):
-            os.mkdir("Mods")
-        if not os.path.exists(modsPatch + os.path.sep + "cache"):
-            os.mkdir("Mods/cache")
-        with open(modsPatch + os.path.sep + "cache" + os.path.sep + file, "wb") as handle:
-            for data in tqdm(f.iter_content(), desc="Downloading "):
-                handle.write(data)
-            handle.close()
         extPatch = modsPatch + os.path.sep + t[0]
-        with zipfile.ZipFile(cacheFile) as zf:
-            if not os.path.exists(extPatch):
-                os.mkdir("Mods/" + t[0])
-            for member in tqdm(zf.infolist(), desc="Extracting "):
-                try:
-                    zf.extract(member, extPatch)
-                except zipfile.error:
-                    pass
+        download("https://gamebanana.com/dl/" + f[0], extPatch, kind="zip", replace=True)
         folders = []
         for fol in os.listdir(modsPatch + os.path.sep + t[0]):
             if os.path.isdir(modsPatch + os.path.sep + fol):
@@ -54,6 +39,7 @@ def install(u):
             shutil.move(t[0], mps)
         if os.path.isfile(cacheFile):
             os.remove(cacheFile)
+        input("{0} installed! Press Enter for exit...".format(t[0]))
     else:
         print("bye")
 

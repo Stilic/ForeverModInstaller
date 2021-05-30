@@ -8,8 +8,8 @@ An mod installer for Sonic Forever.
 
 (For testing FMI, you should try check if [this URL](fmi://https://gamebanana.com/mmdl/578328,Mod,289479))
 
-## Disclaimer before remove
-If you want to remove FMI, remove the protocol handler by running `removeProtocol.exe`.
+## Disclaimer before remove or update
+Before removing or updating FMI, remove the protocol handler by running `removeProtocol.exe`.
 
 ## Developper's Documentation
 Its located [here](DEVDOC.md).

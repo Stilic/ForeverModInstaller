@@ -2,9 +2,6 @@
 <a href="https://gamebanana.com/tools/7129"><img src="https://gamebanana.com/tools/embeddables/7129?type=large"/></a>
 
 An mod installer for Sonic Forever.
-
-(You should wait the Super Admin, Tom, to add the tool's intregation to GameBanana before really can use the power of this tool!)
-
 ## Install
 1. [Download the latest release at GitHub](https://github.com/Stylix58/ForeverModInstaller/releases/latest).
 2. Extract the ZIP file at Sonic Forever's folder.

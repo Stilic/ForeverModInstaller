@@ -6,6 +6,8 @@ An mod installer for Sonic Forever.
 2. Extract the ZIP file at Sonic Forever's folder.
 3. Run `registerProtocol.exe` as administrator for register protocol handler.
 
+(For testing FMI, you should try check if [this URL](fmi://https://gamebanana.com/mmdl/578328,Mod,289479))
+
 ## Disclaimer before remove
 If you want to remove FMI, remove the protocol handler by running `removeProtocol.exe`.
 

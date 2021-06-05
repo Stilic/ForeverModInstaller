@@ -1,0 +1,19 @@
+os: windows
+language: python
+python:
+  - "3.8"
+install:
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  - pyinstaller --noconfirm --onefile --name "fmi" main.py
+  - pyinstaller --noconfirm --onefile registerProtocol.py
+  - pyinstaller --noconfirm --onefile removeProtocol.py
+deploy:
+  provider: releases
+  api_key: "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"
+  file_glob: true
+  file: dist/*
+  skip_cleanup: true
+  on:
+    tags: true

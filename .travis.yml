@@ -9,11 +9,11 @@ matrix:
 before_install:
   - python -m pip install -r requirements-test.txt
 install:
-  - pip install -r requirements.txt
+  - python -m pip install -r requirements.txt
 script:
-  - pyinstaller --noconfirm --onefile --name "fmi" main.py
-  - pyinstaller --noconfirm --onefile registerProtocol.py
-  - pyinstaller --noconfirm --onefile removeProtocol.py
+  - python -m pyinstaller --noconfirm --onefile --name "fmi" main.py
+  - python -m pyinstaller --noconfirm --onefile registerProtocol.py
+  - python -m pyinstaller --noconfirm --onefile removeProtocol.py
 deploy:
   provider: releases
   api_key: "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"

@@ -13,8 +13,8 @@ matrix:
         - choco install python
 
 install:
-  - python -m pip install --upgrade pip
-  - pip install -r requirements.txt
+  - py -m pip install --upgrade pip
+  - py -m pip install -r requirements.txt
 
 script:
   - pyinstaller --noconfirm --onefile --name "fmi" main.py

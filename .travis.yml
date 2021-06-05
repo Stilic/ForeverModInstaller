@@ -5,7 +5,7 @@ matrix:
       python: "3.7"
       before_install:
         - choco install python3
-        - export PATH="/c/Python37:/c/Python37/Scripts:$PATH
+        - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
 before_install:
   - python -m pip install -r requirements-test.txt
 install:

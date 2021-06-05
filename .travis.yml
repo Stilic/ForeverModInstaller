@@ -17,9 +17,9 @@ install:
   - py -m pip install -r requirements.txt
 
 script:
-  - pyinstaller --noconfirm --onefile --name "fmi" main.py
-  - pyinstaller --noconfirm --onefile registerProtocol.py
-  - pyinstaller --noconfirm --onefile removeProtocol.py
+  - py -m pyinstaller --noconfirm --onefile --name "fmi" main.py
+  - py -m pyinstaller --noconfirm --onefile registerProtocol.py
+  - py -m pyinstaller --noconfirm --onefile removeProtocol.py
 deploy:
   provider: releases
   api_key: "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"

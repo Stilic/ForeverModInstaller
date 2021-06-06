@@ -1,31 +1,25 @@
-os: windows      # Windows Server, version 1803
-language: shell  # 'language: python' is not yet supported on Windows
-
+os: windows
+language: shell
 env:
   global:
-    - PY37PATH=/c/Python39:/c/Python39/Scripts
-  
+  - PY37PATH=/c/Python39:/c/Python39/Scripts
+  - secure: k6qZ1vzqCirvZumhUywIlPjjXKZYeGyu4q5hJe6XraBUTiefSra02N5FRGvZCqVoFMnudcMCstftbOlUMQuCz7VR4YuWPLnDmukdUkgvXtFKyagIej5ph2/XRaymce8kFYadJ0K65ggT+Pveu6l4LCbOgnGqGTwzMEPjiU3NB3qCO1+u7DEokrAA1ZWK97eaoO8WB/J7VxwNrgWA8bNaPkdZPFKGieWNcYetc5seBwZA7OIG09i7KvvYd0+DZ16Et3U/46JMze3vKwBiGs1I3ELf55OWeD05AGe7z+xnkqbDLf9X2peZe95ksGp+o65gMRSsnfYVy+FDas1+lnutdWtS/31j0+Nyr+HQQCwk0EUColXr6RLoBU279M0C7wbv1Pwg1QgUXEnfR5kvLEJm5SPgQ+zYk1TrWkgmZz/xfSEiH2eiGvkOWI2os6d+7MSoN/7hwAyHujKQw9RxSyCHLjvehYaNMBIzn4L0bkLy21azWkATAovsXAI1pP8aRTtFpug1m04P5U2wczNEYc+UepOCuVhyW/q4SmzPW8Pp+WNMf4x6n/iLxvOU/7QgF6D6ByW+WOl3lVPwABA8SBgmWtScCnVu6iMq30KnmCxAslBX8L7+BcQWfRKV3whFGZIJQZurPOZP0XuI6VmNJfuHfnpodI2R55fFvOqgVSCBhU4=
 matrix:
   include:
-    - name: "Build"
-      env: PATH=$PY37PATH:$PATH
-      before_install:
-        - choco install python
-
+  - name: Build
+    env: PATH=$PY37PATH:$PATH
+    before_install:
+    - choco install python
 install:
-  - py -m pip install --upgrade pip
-  - py -m pip install -r requirements.txt
-
+- py -m pip install --upgrade pip
+- py -m pip install -r requirements.txt
 script:
-  - pyinstaller --noconfirm --onefile --name "fmi" main.py
-  - pyinstaller --noconfirm --onefile registerProtocol.py
-  - pyinstaller --noconfirm --onefile removeProtocol.py
+- pyinstaller --noconfirm --onefile --name "fmi" main.py
+- pyinstaller --noconfirm --onefile registerProtocol.py
+- pyinstaller --noconfirm --onefile removeProtocol.py
 deploy:
   provider: releases
-  api_key: "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"
   file_glob: true
   file: dist/*
   skip_cleanup: true
   draft: true
-  on:
-    all_branches: true

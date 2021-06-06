@@ -29,7 +29,7 @@ def install(u):
         for fol in os.listdir(modsPatch + os.path.sep + t[0]):
             if os.path.isdir(modsPatch + os.path.sep + fol):
                 folders.append(fol)
-        if len(folders) == 1:
+        if len(folders) == 1 and folders[0] == "Data":
             for p in glob(modsPatch + t[0] + "/" + folders[0]):
                 print(p)
                 shutil.move(p, t[0])

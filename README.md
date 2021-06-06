@@ -1,4 +1,4 @@
-# [![Build Status](https://www.travis-ci.com/Stylix58/ForeverModInstaller.svg?branch=main)](https://www.travis-ci.com/Stylix58/ForeverModInstaller) Forever Mod Installer
+# Forever Mod Installer
 <a href="https://gamebanana.com/tools/7129"><img src="https://gamebanana.com/tools/embeddables/7129?type=large"/></a>
 
 An mod installer for Sonic Forever.

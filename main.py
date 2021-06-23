@@ -1,7 +1,8 @@
 import urllib.request as urlreq
 import urllib.error
 import os
-import sys    
+import sys
+import mimetypes
 if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
     os.chdir(os.path.dirname(sys.executable))
 from download import download
@@ -9,6 +10,7 @@ import sys
 import requests
 from glob import glob
 import shutil
+from pyunpack import Archive
 
 
 def install(u):
@@ -20,11 +22,20 @@ def install(u):
 
     yn = str(input("Do you want to install {0}?".format(t[0]) + " (Y/N) "))
     if yn.lower().startswith("y"):
-        file = f[0] + ".zip"
+        finalURL = "https://gamebanana.com/dl/" + f[0]
+        file = t[0] + mimetypes.guess_extension(
+            requests.get(finalURL).headers.get("Content-Type"))
         modsPatch = os.path.abspath(os.path.dirname(os.getcwd() + "/Mods/"))
-        cacheFile = modsPatch + os.path.sep + "cache" + os.path.sep + file
+        cachePath = modsPatch + os.path.sep + "cache" + os.path.sep
+        cacheFile = cachePath + file
         extPatch = modsPatch + os.path.sep + t[0]
-        download("https://gamebanana.com/dl/" + f[0], extPatch, kind="zip", replace=True)
+        download(finalURL, cacheFile, replace=True)
+        if not os.path.isdir(extPatch):
+            os.mkdir(extPatch)
+        else:
+            shutil.rmtree(extPatch)
+            os.mkdir(extPatch)
+        Archive(cacheFile).extractall(extPatch)
         folders = []
         for fol in os.listdir(modsPatch + os.path.sep + t[0]):
             if os.path.isdir(modsPatch + os.path.sep + fol):
@@ -38,7 +49,7 @@ def install(u):
             shutil.rmtree(mps + "/" + t[0])
             shutil.move(t[0], mps)
         if os.path.isfile(cacheFile):
-            os.remove(cacheFile)
+            shutil.rmtree(cachePath)
         input("{0} installed! Press Enter for exit...".format(t[0]))
     else:
         print("bye")

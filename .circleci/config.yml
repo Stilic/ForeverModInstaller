@@ -4,11 +4,15 @@ orbs:
   win: circleci/windows@2.2.0
 
 workflows:
-  main:
+  untagged-build:
     jobs:
       - build
-      - publish-github-release
-
+  tagged-build:
+    jobs:
+      - publish-github-release:
+          filters:
+            tags:
+              only: /^v.*/      
 
 jobs:
   build:

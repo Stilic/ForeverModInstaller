@@ -1,0 +1,40 @@
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
+
+workflows:
+  main:
+    jobs:
+      - build
+      - publish-github-release
+
+
+jobs:
+  build:
+    executor:
+      name: win/default
+      shell: powershell.exe
+    steps:
+      - checkout
+      - run:
+          name: "Install Python"
+          command: choco install python --version=3.9.5
+      - run:
+          name: "Install Deps"
+          command: c:\python37\python.exe -m pip install --user -r requirements.txt
+      - run:
+          name: "Build"
+          command: pyinstaller --noconfirm --onefile --name "fmi" main.py && pyinstaller --noconfirm --onefile registerProtocol.py && pyinstaller --noconfirm --onefile removeProtocol.py
+  publish-github-release:
+    docker:
+      - image: circleci/golang:1.8
+    steps:
+      - attach_workspace:
+          at: ./artifacts
+      - run:
+          name: "Publish Release on GitHub"
+          command: |
+            go get github.com/tcnksm/ghr
+            VERSION=$(my-binary --version)
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./dist/

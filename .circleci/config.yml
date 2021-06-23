@@ -22,7 +22,7 @@ jobs:
           command: choco install python --version=3.9.5
       - run:
           name: "Install Deps"
-          command: c:\python37\python.exe -m pip install --user -r requirements.txt
+          command: python -m pip install --user -r requirements.txt
       - run:
           name: "Build"
           command: pyinstaller --noconfirm --onefile --name "fmi" main.py && pyinstaller --noconfirm --onefile registerProtocol.py && pyinstaller --noconfirm --onefile removeProtocol.py

@@ -28,10 +28,10 @@ jobs:
           command: pyinstaller --noconfirm --onefile --name "fmi" main.py && pyinstaller --noconfirm --onefile registerProtocol.py && pyinstaller --noconfirm --onefile removeProtocol.py
   publish-github-release:
     docker:
-      - image: circleci/golang:1.8
+      - image: circleci/golang:1.12
     steps:
       - attach_workspace:
-          at: ./artifacts
+          at: ./dist
       - run:
           name: "Publish Release on GitHub"
           command: |

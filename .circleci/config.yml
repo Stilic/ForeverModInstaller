@@ -14,7 +14,7 @@ jobs:
   build:
     executor:
       name: win/default
-      shell: powershell.exe
+      shell: cmd.exe
     steps:
       - checkout
       - run:
@@ -36,4 +36,4 @@ jobs:
           name: "Publish Release on GitHub"
           command: |
             go get github.com/tcnksm/ghr
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -delete ${VERSION} ${CIRCLE_TAG} ./dist/
+            CIRCLE_TAG="$(git tag -l --points-at HEAD)" ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -delete ${VERSION} ${CIRCLE_TAG} ./dist/
